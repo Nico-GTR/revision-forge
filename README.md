@@ -20,8 +20,6 @@ Drop your lectures, tutorial sheets and past exams into a Claude project. Get ba
 
 Nothing is made up: every page comes from your own documents, every number is recomputed by code, and every claim carries a badge saying where it comes from.
 
-<p align="center"><img src="assets/screenshots/01-dashboard.png" alt="Dashboard of a generated revision site: exam countdown, 'Where do I start?' button, chapter mastery ordered by the diagnosis" width="100%"></p>
-
 ## ✨ What you get
 
 <table>
@@ -69,31 +67,6 @@ A short diagnosis sets the chapter order; every misconception gets a warning box
 
 Plus: glossary, light/dark theme, phone-friendly layout, progress saved in the browser. No server, no API key, no AI call once online.
 
-## 📸 A look inside
-
-Screenshots from **Graphs 101**, a demo site on graph algorithms (English content, any course works).
-
-<table>
-<tr>
-<td width="50%" valign="top"><img src="assets/screenshots/03-diagram.png" alt="Interactive Dijkstra diagram at step 2: graph, distance table, priority queue, explanation of the step and playback controls"><br><b>Interactive diagrams.</b> Step through Dijkstra: the graph, the distance table and the queue update together, with the <i>why</i> of each step.</td>
-<td width="50%" valign="top"><img src="assets/screenshots/02-chapter.png" alt="Chapter page with intuition, exact formula, origin badges and a table of contents"><br><b>Chapter pages.</b> Intuition first, exact formulas, origin badges on every section, and a diagram right where it helps.</td>
-</tr>
-<tr>
-<td valign="top"><img src="assets/screenshots/04-search.png" alt="Search palette with grouped results for 'relax': course sections, glossary, workshop generator and diagram"><br><b>Global search.</b> <kbd>Ctrl</kbd> <kbd>K</kbd> from anywhere: course sections, glossary, exercises and diagrams, highlighted.</td>
-<td valign="top"><img src="assets/screenshots/05-workshop.png" alt="Workshop exercise with a generated graph, a wrong answer, feedback naming misconception F2 and a step-by-step solution"><br><b>Workshop.</b> Generated exercises, instant marking, feedback that names the misconception, step-by-step solution, spaced repetition.</td>
-</tr>
-<tr>
-<td valign="top"><img src="assets/screenshots/06-mock-exam.png" alt="Mock exam with timer, real MCQ penalty and exam structure"><br><b>Mock exam.</b> The real past-exam structure, timer and MCQ penalty, then a per-chapter report.</td>
-<td valign="top"><img src="assets/screenshots/08-diagram-dark.png" alt="The same Dijkstra diagram in dark theme at step 5"><br><b>Dark theme.</b> Diagrams redraw with the theme: no black boxes on light pages, no glare at night.</td>
-</tr>
-</table>
-
-<details>
-<summary><b>📱 On a phone</b></summary>
-<br>
-<p align="center"><img src="assets/screenshots/07-mobile-dark.png" alt="Chapter page on a phone in dark theme, with the diagram and its distance table stacked" width="320"></p>
-</details>
-
 ## 🔧 How it works
 
 Two skills, one for each stage:
@@ -136,7 +109,7 @@ Why a Claude project for stage ①? Because the context is already there: your d
 3. Deploy. From now on, **every push to `main` updates the site.**
 
 > [!NOTE]
-> **Language.** The site is built in the language of your course and your conversations: French documents and French chats give a French site. Want another language? Just say so when you ask for the design folder (*"make the site in English"*): it is written into the brief and Claude Code follows it. The design files themselves are in English by default; they are instructions for Claude Code and never appear on the site.
+> The site speaks the language of your documents: a French course gives a French site.
 
 ## 📥 Installation
 
@@ -146,9 +119,11 @@ Why a Claude project for stage ①? Because the context is already there: your d
 <br>
 
 1. Enable code execution and file creation in *Settings > Capabilities*.
-2. Zip the skill folder, with the folder itself at the root of the zip:
-   - **macOS / Linux / Git Bash**: run `./scripts/package-skills.sh`, which writes `dist/revision-site-brief.zip` and `dist/revision-site-builder.zip`;
-   - **Windows**: right-click `skills/revision-site-brief` → *Compress to ZIP file* (or *Send to → Compressed folder*).
+2. Clone this repo and run:
+   ```bash
+   ./scripts/package-skills.sh
+   ```
+   It writes `dist/revision-site-brief.zip` and `dist/revision-site-builder.zip`.
 3. In *Customize > Skills*, click **+** → *Create skill* → *Upload a skill*, and pick `revision-site-brief.zip`.
 
 </details>
@@ -265,9 +240,6 @@ Report a buggy diagram and Claude Code first writes a test that reproduces it, t
 **Does it work for courses without calculations?**
 Yes. Computational chapters get random-value generators; the others get item banks (short answers, fill-in-the-blank, matching, ordering, flashcards). Oral exams and project defences get an oral mode.
 
-**Can my site be in another language than my course?**
-Yes. By default it follows your documents and conversations; ask for another language when you request the design folder and it is recorded in the brief.
-
 **Do I need to know React?**
 No. Claude Code writes and tests the code. Content lives in separate files, so you can fix a sentence without touching components.
 
@@ -288,8 +260,7 @@ It pushes to the allowed branch and tells you how to merge it or point Netlify a
 .
 ├── README.md
 ├── assets/
-│   ├── banner.svg
-│   └── screenshots/                   # demo site used in this README
+│   └── banner.svg
 ├── scripts/
 │   └── package-skills.sh              # builds dist/<skill>.zip for upload to Claude
 └── skills/
